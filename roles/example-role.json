@@ -1,0 +1,34 @@
+{
+  "role": "Digital Marketing Executive",
+  "summary": "Runs paid social + content for client accounts. Malaysia-based, hybrid.",
+  "location_hint": ["Kuching", "Sarawak", "Sibu", "Miri", "Malaysia", "Kuala Lumpur"],
+  "must_have": [
+    "digital marketing",
+    "social media",
+    "meta ads",
+    "facebook ads",
+    "content"
+  ],
+  "nice_to_have": [
+    "seo",
+    "copywriting",
+    "google ads",
+    "canva",
+    "analytics",
+    "crm",
+    "tiktok",
+    "video editing",
+    "b2b"
+  ],
+  "exclude": [
+    "student",
+    "intern",
+    "seeking opportunities abroad"
+  ],
+  "weights": {
+    "must_have": 55,
+    "nice_to_have": 25,
+    "location": 20
+  },
+  "outreach_angle": "Agency-side work with real client ownership, not a cog role. Emphasise autonomy, learning budget, and Sarawak-based team."
+}

@@ -1,0 +1,12 @@
+# Candidate data is personal information — never commit it.
+data/*.jsonl
+data/.cache/
+data/*.csv
+*.csv
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.DS_Store
