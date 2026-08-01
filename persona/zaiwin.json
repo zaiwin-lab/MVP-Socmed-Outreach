@@ -1,0 +1,182 @@
+{
+  "_comment": "Source of truth for professional positioning. Mirrors the GitHub profile README so LinkedIn, Facebook and GitHub say the same thing. Edit this, then re-run `python3 -m scout persona render`.",
+
+  "name": "Zaiwin Kassim",
+  "honorific": "Ts",
+  "location": "Kuching, Sarawak, Malaysia",
+  "location_short": "Kuching, Sarawak",
+
+  "positioning": {
+    "titles": [
+      "AI-Enabled Digital Product Strategist",
+      "Programme Innovation Lead",
+      "Rapid MVP Builder"
+    ],
+    "one_liner": "I turn operational problems into working digital platforms.",
+    "sharper_one_liner": "Not slide decks. Working software that people log into on Monday morning.",
+    "motto": "Business-first. Human-directed. AI-accelerated. Impact-focused."
+  },
+
+  "current_role": {
+    "title": "Chairman",
+    "company": "KOBIS Berhad",
+    "team": "KOBIS AI Prodigy Team",
+    "team_tagline": "Smart digital solutions. Sustainable impact.",
+    "covers": [
+      "solution architecture",
+      "stakeholder requirements",
+      "product direction",
+      "supervised AI-assisted delivery"
+    ]
+  },
+
+  "education": [
+    "Master of Business Administration",
+    "Bachelor of Engineering in Mechatronics"
+  ],
+
+  "capabilities": [
+    {
+      "name": "Digital Product Strategy",
+      "detail": "translating operational problems into roadmaps someone can build from"
+    },
+    {
+      "name": "Programme Innovation",
+      "detail": "designing workflows for participation, delivery, evidence, certification, claims and reporting"
+    },
+    {
+      "name": "Solution Architecture",
+      "detail": "connecting user journeys, data, dashboards, automation and deployment"
+    },
+    {
+      "name": "Rapid MVP Development",
+      "detail": "concept to testable prototype in weeks, not quarters"
+    },
+    {
+      "name": "AI-Assisted Delivery",
+      "detail": "directing and supervising AI coding tools while retaining human judgment and accountability"
+    },
+    {
+      "name": "Stakeholder Alignment",
+      "detail": "shaping technology around what management, teams and users actually need"
+    }
+  ],
+
+  "proof": [
+    {
+      "name": "Executive 7-Lens Proposal Assessor",
+      "outcome": "explainable 100-point proposal-readiness scoring through CIO, CFO, CTO, COO, CSO, CRO and CMO perspectives",
+      "short": "explainable 100-point proposal-readiness scoring across seven executive lenses",
+      "demo": "https://prop7cq.netlify.app",
+      "repo": "https://github.com/zaiwin-lab/Prop-Asessor"
+    },
+    {
+      "name": "Syahlan Digital Web Builder",
+      "outcome": "multilingual website-service journey helping entrepreneurs and organisations establish a professional digital presence",
+      "short": "multilingual website-service journey for entrepreneurs going digital",
+      "demo": "https://syahlansdc.com",
+      "repo": "https://github.com/zaiwin-lab/KDP-Shazlan"
+    },
+    {
+      "name": "KAPT Digital Clinic",
+      "outcome": "organisational challenge intake, human-reviewed digital diagnosis and internal case-management workflow",
+      "short": "challenge intake, human-reviewed diagnosis and case management",
+      "demo": "https://kapt-digital-clinic.netlify.app",
+      "repo": "https://github.com/zaiwin-lab/MVP-AI-Tester"
+    },
+    {
+      "name": "Spinify Engagement Platform",
+      "outcome": "QR-led customer capture, rewards, repeat-visit journeys, campaign concepts and owner insights",
+      "short": "QR-led customer capture, rewards and repeat-visit journeys",
+      "demo": "https://kbt-spinify.netlify.app",
+      "repo": "https://github.com/zaiwin-lab/KBT-Spinify"
+    },
+    {
+      "name": "VDP Training Journey Guide",
+      "outcome": "QR attendance, participant profiles, readiness assessment, learning resources, action plans and supervisor reporting",
+      "short": "QR attendance, readiness assessment, action plans and supervisor reporting",
+      "demo": "https://kbtmaravdp.uk",
+      "repo": "https://github.com/zaiwin-lab/MVP-EVOS-Mara"
+    },
+    {
+      "name": "Property Concierge Platform",
+      "outcome": "curated property discovery, affordability and ROI tools, appointment journeys and AI-assisted guidance",
+      "short": "curated discovery, affordability and ROI tools, appointment journeys",
+      "demo": "https://mvp-property.netlify.app",
+      "repo": "https://github.com/zaiwin-lab/MVP-Property"
+    }
+  ],
+
+  "ai_position": [
+    "AI accelerates implementation. It does not replace leadership or accountability.",
+    "I direct and supervise AI-assisted delivery: strategy, requirements, workflow architecture, review and delivery decisions stay human. AI-generated work is supervised, tested and refined before anyone relies on it."
+  ],
+
+  "stack": [
+    "React", "TypeScript", "Next.js", "Vite", "Tailwind CSS",
+    "Supabase", "Netlify", "GitHub Actions", "AI-assisted engineering"
+  ],
+
+  "collaboration": [
+    "entrepreneurship and workforce programmes",
+    "programme-management systems",
+    "AI-enabled organisational workflows",
+    "community and environmental impact",
+    "digital transformation for Sarawak organisations"
+  ],
+
+  "closing_hook": "If you have an operational problem that keeps getting solved with a spreadsheet and goodwill, that is exactly the kind of thing I build for.",
+
+  "links": {
+    "github": "https://github.com/zaiwin-lab"
+  },
+
+  "keywords": {
+    "primary": [
+      "digital product strategy",
+      "programme innovation",
+      "solution architecture",
+      "MVP",
+      "AI-enabled",
+      "digital transformation"
+    ],
+    "secondary": [
+      "product roadmap", "stakeholder", "workflow", "dashboard",
+      "prototype", "programme management", "CRM", "automation",
+      "React", "Supabase", "Sarawak", "Kuching", "MBA", "mechatronics"
+    ]
+  },
+
+  "skills_order": [
+    "Digital Product Strategy",
+    "Solution Architecture",
+    "Programme Management",
+    "Product Roadmapping",
+    "Rapid Prototyping",
+    "Requirements Gathering",
+    "Stakeholder Management",
+    "Business Process Improvement",
+    "Workflow Automation",
+    "AI-Assisted Development",
+    "Artificial Intelligence (AI)",
+    "Minimum Viable Product (MVP)",
+    "Software Architecture",
+    "Systems Engineering",
+    "Digital Transformation",
+    "React",
+    "TypeScript",
+    "Next.js",
+    "Supabase",
+    "Tailwind CSS",
+    "Netlify",
+    "Git",
+    "Data Visualisation",
+    "Dashboard Design",
+    "User Journey Mapping",
+    "Training Programme Design",
+    "Entrepreneurship",
+    "Team Leadership",
+    "Corporate Governance",
+    "Mechatronics"
+  ]
+}
