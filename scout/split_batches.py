@@ -154,9 +154,21 @@ def main(argv: list[str] | None = None) -> int:
     rows, dropped = dedupe(rows)
     print(f"  after dedupe    {len(rows)}  ({dropped} removed)")
 
-    no_phone = sum(1 for r in rows if not r["phone"])
-    if no_phone:
-        print(f"  ! {no_phone} records have no usable phone number")
+    # A call sheet must only contain numbers a caller can actually dial.
+    # The registry carries placeholder values ("0") and truncated numbers.
+    callable_rows = [r for r in rows if r["phone"]]
+    unreachable = [r for r in rows if not r["phone"]]
+    if unreachable:
+        print(f"  ! {len(unreachable)} records have no usable phone number "
+              f"— held out of the call sheets")
+        out_dir = Path(args.out_dir)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        with (out_dir / "NO_PHONE_email_only.csv").open(
+                "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=CALL_COLUMNS, extrasaction="ignore")
+            w.writeheader()
+            w.writerows(unreachable)
+    rows = callable_rows
 
     rows = order(rows)
     if args.limit:
