@@ -12,6 +12,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import re
 import csv
 from pathlib import Path
 
@@ -33,6 +34,19 @@ RED = colors.HexColor("#A3231D")
 TITLE = "LPC SPECIAL TASK — IECONS 2026 DELEGATE DRIVE"
 ORG = "KOBIS BERHAD  •  LPC AI SANDBOX  •  Sarawak Entrepreneurs Association"
 REF = "JO/LPC-KAPT/2026-08/IECONS-01  (Rev. B)"
+FOOTER_L = "Internal Use Only  •  LPC-KAPT  •  Confidential"
+FOOTER_R = "Do not distribute outside the assigned team"
+
+
+def set_header(title: str, org: str, ref: str,
+               footer_l: str | None = None, footer_r: str | None = None) -> None:
+    """Override the running head/foot for a document."""
+    global TITLE, ORG, REF, FOOTER_L, FOOTER_R
+    TITLE, ORG, REF = title, org, ref
+    if footer_l is not None:
+        FOOTER_L = footer_l
+    if footer_r is not None:
+        FOOTER_R = footer_r
 
 
 def styles() -> dict:
@@ -95,10 +109,8 @@ def _header_footer(canvas, doc):
     canvas.line(15 * mm, 13 * mm, w - 15 * mm, 13 * mm)
     canvas.setFont("Helvetica", 7)
     canvas.setFillColor(SLATE)
-    canvas.drawString(15 * mm, 9 * mm,
-                      "Internal Use Only  •  LPC-KAPT  •  Confidential")
-    canvas.drawRightString(w - 15 * mm, 9 * mm,
-                           "Do not distribute outside the assigned team")
+    canvas.drawString(15 * mm, 9 * mm, FOOTER_L)
+    canvas.drawRightString(w - 15 * mm, 9 * mm, FOOTER_R)
     canvas.restoreState()
 
 
@@ -126,7 +138,29 @@ def fit(widths: list, total: float) -> list:
     return [slack if w is None else w for w in widths]
 
 
+_BARE_AMP = re.compile(r"&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)")
+
+
+def _wrap(cell, style):
+    """Plain strings do not wrap inside a reportlab table — Paragraphs do.
+
+    Long text is promoted to a Paragraph so it flows inside its column instead
+    of running across the neighbouring ones.
+    """
+    if not isinstance(cell, str) or len(cell) <= 24:
+        return cell
+    return Paragraph(_BARE_AMP.sub("&amp;", cell), style)
+
+
 def table(data, widths, *, header=True, align=None, font_size=8.2, pad=4):
+    body_style = ParagraphStyle("tcell", fontName="Helvetica",
+                                fontSize=font_size, leading=font_size * 1.28)
+    start = 1 if header else 0
+    data = [list(row) for row in data]
+    for row in data[start:]:
+        for i, cell in enumerate(row):
+            row[i] = _wrap(cell, body_style)
+
     t = Table(data, colWidths=widths, repeatRows=1 if header else 0)
     cmds = [
         ("FONTNAME", (0, 0), (-1, -1), "Helvetica"),
