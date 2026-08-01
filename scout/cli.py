@@ -212,6 +212,49 @@ def cmd_export(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_cidb(args: argparse.Namespace) -> int:
+    from . import cidb
+
+    grades = [g.strip().upper() for g in args.grade.split(",") if g.strip()]
+    districts = [d.strip() for d in args.district.split(",") if d.strip()]
+
+    fields = ["company", "grade", "district", "phone", "email", "state",
+              "cidb_id", "queried_grade"]
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+
+    seen: set[tuple[str, str]] = set()
+    rows: list[dict[str, object]] = []
+    dupes = 0
+
+    # Write as we go — a long pull must survive a mid-run failure.
+    with out.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
+        writer.writeheader()
+        for district in districts:
+            print(f"  {district}:", flush=True)
+            for rec in cidb.pull(args.state, district, grades,
+                                 page_size=args.page_size, delay=args.delay,
+                                 log=lambda m: print(m, flush=True)):
+                # Dedupe on company + phone: a firm can hold several grades.
+                key = (rec["company"].strip().upper(), rec["phone"].strip())
+                if key in seen:
+                    dupes += 1
+                    continue
+                seen.add(key)
+                rows.append(rec)
+                writer.writerow({k: rec.get(k, "") for k in fields})
+                fh.flush()
+
+    with_phone = sum(1 for r in rows if r["phone"])
+    with_email = sum(1 for r in rows if r["email"])
+    print(f"\n  {len(rows)} unique contractors ({dupes} duplicates removed)")
+    print(f"  with phone: {with_phone} ({with_phone * 100 // max(len(rows), 1)}%)")
+    print(f"  with email: {with_email} ({with_email * 100 // max(len(rows), 1)}%)")
+    print(f"  -> {out}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="scout", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -251,6 +294,15 @@ def build_parser() -> argparse.ArgumentParser:
     n.add_argument("id")
     n.add_argument("text")
     n.set_defaults(func=cmd_note)
+
+    c = sub.add_parser("cidb", help="pull contractors from the public CIDB registry")
+    c.add_argument("--state", default="SARAWAK")
+    c.add_argument("--district", required=True, help="comma-separated district names")
+    c.add_argument("--grade", default="G1,G2,G3", help="comma-separated, e.g. G1,G2,G3")
+    c.add_argument("--out", required=True, help="output CSV path")
+    c.add_argument("--page-size", type=int, default=100)
+    c.add_argument("--delay", type=float, default=2.0, help="seconds between requests")
+    c.set_defaults(func=cmd_cidb)
 
     e = sub.add_parser("export", help="export to CSV")
     e.add_argument("--csv", required=True)
